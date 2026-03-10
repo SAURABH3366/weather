@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JARVIS AI Weather Dashboard</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Orbitron,Arial;
+background:black;
+color:#00eaff;
+overflow:hidden;
+}
+
+.dashboard{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+height:100vh;
+text-align:center;
+}
+
+h1{
+letter-spacing:4px;
+text-shadow:0 0 10px #00eaff;
+}
+
+.clock{
+font-size:30px;
+margin-bottom:20px;
+}
+
+.panel{
+border:2px solid #00eaff;
+padding:30px;
+border-radius:15px;
+box-shadow:0 0 20px #00eaff;
+width:350px;
+background:rgba(0,0,0,0.6);
+}
+
+input{
+padding:10px;
+width:80%;
+margin:10px;
+background:black;
+border:1px solid #00eaff;
+color:#00eaff;
+}
+
+button{
+padding:10px 20px;
+background:#00eaff;
+border:none;
+cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{
+background:#009fb3;
+}
+
+#result{
+margin-top:20px;
+}
+
+img{
+width:80px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<h1>JARVIS AI WEATHER</h1>
+
+<div class="clock" id="clock"></div>
+
+<div class="panel">
+
+<input type="text" id="city" placeholder="ENTER CITY">
+
+<br>
+
+<button onclick="getWeather()">SCAN WEATHER</button>
+
+<button onclick="getLocationWeather()">AUTO LOCATION</button>
+
+<div id="result"></div>
+
+</div>
+
+</div>
+
+<script>
+
+let apiKey="14fc191d7f074cf9a1562616261003";
+
+
+function updateClock(){
+
+let now=new Date();
+
+document.getElementById("clock").innerHTML=
+now.toLocaleTimeString();
+
+}
+
+setInterval(updateClock,1000);
+
+
+
+async function getWeather(){
+
+let city=document.getElementById("city").value;
+
+let url=`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=yes`;
+
+fetchWeather(url);
+
+}
+
+
+
+function getLocationWeather(){
+
+navigator.geolocation.getCurrentPosition(position=>{
+
+let lat=position.coords.latitude;
+
+let lon=position.coords.longitude;
+
+let url=`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}&aqi=yes`;
+
+fetchWeather(url);
+
+});
+
+}
+
+
+
+async function fetchWeather(url){
+
+try{
+
+let response=await fetch(url);
+
+let data=await response.json();
+
+document.getElementById("result").innerHTML=`
+
+<h2>${data.location.name}</h2>
+
+<p>Temperature : ${data.current.temp_c} °C</p>
+
+<p>Condition : ${data.current.condition.text}</p>
+
+<p>Humidity : ${data.current.humidity}%</p>
+
+<p>Wind : ${data.current.wind_kph} kph</p>
+
+<img src="https:${data.current.condition.icon}">
+
+`;
+
+speakWeather(data);
+
+}
+
+catch{
+
+document.getElementById("result").innerHTML="SYSTEM ERROR";
+
+}
+
+}
+
+
+
+function speakWeather(data){
+
+let msg=`Weather in ${data.location.name} is ${data.current.condition.text} and temperature is ${data.current.temp_c} degree celsius`;
+
+let speech=new SpeechSynthesisUtterance(msg);
+
+speech.rate=1;
+
+speech.pitch=1;
+
+speech.volume=1;
+
+speechSynthesis.speak(speech);
+
+}
+
+</script>
+
+</body>
+</html>
