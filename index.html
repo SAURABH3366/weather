@@ -16,7 +16,11 @@ body{
 height:100vh;
 display:flex;
 justify-content:center;
-align-items:center;
+align-items:center;<input type="email" placeholder="Enter Email">
+
+<input type="password" placeholder="Enter Password">
+
+<button>Login</button>
 background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#1c2733);
 background-size:400% 400%;
 animation:bgMove 10s ease infinite;
@@ -128,12 +132,15 @@ font-weight:600;
 
 <h2>🌦 Smart Weather Login</h2>
 
-<input type="email" placeholder="Enter Email">
+<form action="weather.html">
 
-<input type="password" placeholder="Enter Password">
+<input type="email" placeholder="Enter Email" required>
 
-<button>Login</button>
+<input type="password" placeholder="Enter Password" required>
 
+<button type="submit">Login</button>
+
+</form>
 </div>
 
 <footer>
