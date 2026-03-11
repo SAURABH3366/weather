@@ -1,8 +1,105 @@
-<body>
-
-<!-- login form / weather app code -->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Smart Weather App</title>
 
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#1c2733);
+background-size:400% 400%;
+animation:bgMove 10s ease infinite;
+}
+
+/* animated background */
+
+@keyframes bgMove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+/* login container */
+
+.login-box{
+width:340px;
+padding:40px;
+border-radius:15px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+box-shadow:0 0 30px rgba(0,0,0,0.4);
+text-align:center;
+color:white;
+animation:fadeIn 1.2s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+.login-box h2{
+margin-bottom:25px;
+letter-spacing:1px;
+}
+
+/* inputs */
+
+.login-box input{
+width:100%;
+padding:12px;
+margin:12px 0;
+border:none;
+border-radius:6px;
+outline:none;
+background:rgba(255,255,255,0.15);
+color:white;
+font-size:14px;
+transition:0.3s;
+}
+
+.login-box input::placeholder{
+color:#ddd;
+}
+
+.login-box input:focus{
+background:rgba(255,255,255,0.25);
+transform:scale(1.02);
+}
+
+/* login button */
+
+.login-box button{
+width:100%;
+padding:12px;
+margin-top:15px;
+border:none;
+border-radius:6px;
+background:#00c6ff;
+color:white;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.login-box button:hover{
+background:#0096c7;
+transform:scale(1.05);
+box-shadow:0 0 15px #00c6ff;
+}
+
+/* footer */
 
 footer{
 position:fixed;
@@ -12,28 +109,9 @@ background:linear-gradient(90deg,#0b0f14,#0a1a22,#0b0f14);
 color:#e6f7ff;
 text-align:center;
 padding:14px 0;
-font-family:Segoe UI, Arial, sans-serif;
 font-size:13px;
 letter-spacing:1px;
 border-top:1px solid #1f2a35;
-overflow:hidden;
-}
-
-footer::after{
-content:"";
-position:absolute;
-top:0;
-left:-100%;
-width:100%;
-height:2px;
-background:linear-gradient(90deg,transparent,#4fc3f7,transparent);
-animation:scan 6s linear infinite;
-}
-
-@keyframes scan{
-0%{left:-100%;opacity:0}
-50%{opacity:1}
-100%{left:100%;opacity:0}
 }
 
 .dev{
@@ -42,6 +120,21 @@ font-weight:600;
 }
 
 </style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+<h2>🌦 Smart Weather Login</h2>
+
+<input type="email" placeholder="Enter Email">
+
+<input type="password" placeholder="Enter Password">
+
+<button>Login</button>
+
+</div>
 
 <footer>
 © 2026 Smart Weather App | Crafted by <span class="dev">SAURABH</span>
