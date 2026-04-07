@@ -12,21 +12,23 @@ box-sizing:border-box;
 font-family:'Segoe UI',sans-serif;
 }
 
+/* ===== BODY BACKGROUND ===== */
+
 body{
 height:100vh;
 display:flex;
 justify-content:center;
-align-items:center;<input type="email" placeholder="Enter Email">
+align-items:center;
+overflow:hidden;
 
-<input type="password" placeholder="Enter Password">
-
-<button>Login</button>
-background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#1c2733);
-background-size:400% 400%;
-animation:bgMove 10s ease infinite;
+/* Premium animated gradient */
+background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1c2733);
+background-size: 400% 400%;
+animation: bgMove 12s ease infinite;
+position: relative;
 }
 
-/* animated background */
+/* gradient animation */
 
 @keyframes bgMove{
 0%{background-position:0% 50%}
@@ -34,18 +36,48 @@ animation:bgMove 10s ease infinite;
 100%{background-position:0% 50%}
 }
 
-/* login container */
+/* ===== WEATHER LIGHT EFFECT ===== */
+
+body::before{
+content:"";
+position:absolute;
+width:600px;
+height:600px;
+background: radial-gradient(circle, rgba(0,198,255,0.25), transparent 70%);
+top:-100px;
+left:-100px;
+animation: floatLight 8s ease-in-out infinite;
+}
+
+body::after{
+content:"";
+position:absolute;
+width:500px;
+height:500px;
+background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
+bottom:-120px;
+right:-100px;
+animation: floatLight 10s ease-in-out infinite reverse;
+}
+
+@keyframes floatLight{
+0%,100%{transform: translate(0,0);}
+50%{transform: translate(30px,20px);}
+}
+
+/* ===== LOGIN BOX ===== */
 
 .login-box{
 width:340px;
 padding:40px;
 border-radius:15px;
 background:rgba(255,255,255,0.05);
-backdrop-filter:blur(10px);
+backdrop-filter:blur(12px);
 box-shadow:0 0 30px rgba(0,0,0,0.4);
 text-align:center;
 color:white;
 animation:fadeIn 1.2s ease;
+border:1px solid rgba(255,255,255,0.1);
 }
 
 @keyframes fadeIn{
@@ -58,7 +90,7 @@ margin-bottom:25px;
 letter-spacing:1px;
 }
 
-/* inputs */
+/* ===== INPUTS ===== */
 
 .login-box input{
 width:100%;
@@ -82,7 +114,7 @@ background:rgba(255,255,255,0.25);
 transform:scale(1.02);
 }
 
-/* login button */
+/* ===== BUTTON ===== */
 
 .login-box button{
 width:100%;
@@ -103,7 +135,7 @@ transform:scale(1.05);
 box-shadow:0 0 15px #00c6ff;
 }
 
-/* footer */
+/* ===== FOOTER ===== */
 
 footer{
 position:fixed;
@@ -130,7 +162,7 @@ font-weight:600;
 
 <div class="login-box">
 
-<h2> 🌦 Smart Weather Login</h2>
+<h2>🌦 Smart Weather Login</h2>
 
 <form action="weather.html">
 
@@ -141,6 +173,7 @@ font-weight:600;
 <button type="submit">Login</button>
 
 </form>
+
 </div>
 
 <footer>
